@@ -17,13 +17,13 @@ It is highly recommended to use a virtual environment to manage project-specific
 
 From the project's root directory (D:\\AI), run:
 ```bash
-python \-m venv .venv
+python -m venv .venv
 ```
 ### **2\. Activate the Virtual Environment**
 
 **On Windows:**
 ```bash
-.\\.venv\\Scripts\\activate
+.\.venv\\Scripts\\activate
 ```
 **On macOS/Linux:**
 ```bash
@@ -35,7 +35,7 @@ You will know it's active when you see (.venv) at the beginning of your terminal
 
 Install all the required Python packages from the requirements.txt file.
 ```bash
-pip install \-r requirements.txt
+pip install -r requirements.txt
 ```
 ## **Data Preparation**
 
