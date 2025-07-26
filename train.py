@@ -21,7 +21,7 @@ LEARNING_RATE = 0.0001
 NUM_EPOCHS = 3 # Increased for demonstration
 LOG_INTERVAL = 1
 # Increased max_len to handle long sequences in your data
-MAX_SEQ_LEN = 20000 
+MAX_SEQ_LEN = 50000 
 
 # --- Step 1: Streaming Dataset Class (using an IterableDataset) ---
 
