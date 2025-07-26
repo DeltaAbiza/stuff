@@ -15,7 +15,7 @@ Follow these steps to set up your local environment and install the necessary de
 
 It is highly recommended to use a virtual environment to manage project-specific dependencies.
 
-From the project's root directory (D:\\AI), run:
+From the project's root directory, run:
 ```bash
 python -m venv .venv
 ```
@@ -23,7 +23,7 @@ python -m venv .venv
 
 **On Windows:**
 ```bash
-.\.venv\\Scripts\\activate
+.\.venv\Scripts\activate
 ```
 **On macOS/Linux:**
 ```bash
