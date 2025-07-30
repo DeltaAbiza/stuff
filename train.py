@@ -12,17 +12,17 @@ TOKENIZED_DATA_PATH = "data/tokenize_data.jsonl"
 TOKENIZER_PATH = "data/tokenizer.json" 
 MODEL_SAVE_PATH = "./models" # Directory to save models
 BATCH_SIZE = 4
-D_MODEL = 512
-NHEAD = 8
+D_MODEL = 256
+NHEAD = 4
 NUM_ENCODER_LAYERS = 6
 NUM_DECODER_LAYERS = 6
 DIM_FEEDFORWARD = 2048
-LEARNING_RATE = 0.0001
+LEARNING_RATE = 3e-4
 NUM_EPOCHS = 3 # Increased for demonstration
 LOG_INTERVAL = 1
 # Increased max_len to handle long sequences in your data
-MAX_SEQ_LEN = 50000 
-
+MAX_SEQ_LEN = 40000 
+TRUNCATE_ARTICLE_TO=40000
 # --- Step 1: Streaming Dataset Class (using an IterableDataset) ---
 
 class SummarizationDataset(IterableDataset):
@@ -41,8 +41,10 @@ class SummarizationDataset(IterableDataset):
             for line in f:
                 try:
                     data = json.loads(line)
+        # Truncate the article sequence to the specified max length
+                    article_ids = data["article_ids"][:TRUNCATE_ARTICLE_TO]
                     yield {
-                        "article": torch.tensor(data["article_ids"], dtype=torch.long),
+                        "article": torch.tensor(article_ids, dtype=torch.long),
                         "abstract": torch.tensor(data["abstract_ids"], dtype=torch.long)
                     }
                 except (json.JSONDecodeError, KeyError):
@@ -108,7 +110,8 @@ class SummarizationTransformer(nn.Module):
             src_pos, tgt_pos,
             tgt_mask=tgt_mask,
             src_key_padding_mask=src_padding_mask,
-            tgt_key_padding_mask=tgt_padding_mask
+            tgt_key_padding_mask=tgt_padding_mask,
+            memory_key_padding_mask=src_padding_mask
         )
         return self.fc_out(output)
 

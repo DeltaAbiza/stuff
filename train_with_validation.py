@@ -12,17 +12,17 @@ TOKENIZED_DATA_PATH = "data/tokenize_data.jsonl"
 TOKENIZER_PATH = "data/tokenizer.json"
 MODEL_SAVE_PATH = "./models"
 BATCH_SIZE = 4
-D_MODEL = 512
-NHEAD = 8
+D_MODEL = 256
+NHEAD = 4
 NUM_ENCODER_LAYERS = 6
 NUM_DECODER_LAYERS = 6
 DIM_FEEDFORWARD = 2048
-LEARNING_RATE = 0.0001
+LEARNING_RATE = 3e-4
 NUM_EPOCHS = 3
 LOG_INTERVAL = 10 # Log every 10 batches
-MAX_SEQ_LEN = 50000
+MAX_SEQ_LEN = 40000
 VALIDATION_SPLIT = 0.1 # Use 10% of data for validation
-
+TRUNCATE_ARTICLE_TO=40000
 # --- Step 1: Standard Dataset Class ---
 class SummarizationTensorDataset(Dataset):
     def __init__(self, data):
@@ -33,8 +33,9 @@ class SummarizationTensorDataset(Dataset):
 
     def __getitem__(self, idx):
         item = self.data[idx]
+        article_ids = item["article_ids"][:TRUNCATE_ARTICLE_TO]
         return {
-            "article": torch.tensor(item["article_ids"], dtype=torch.long),
+            "article": torch.tensor(article_ids, dtype=torch.long),
             "abstract": torch.tensor(item["abstract_ids"], dtype=torch.long)
         }
 

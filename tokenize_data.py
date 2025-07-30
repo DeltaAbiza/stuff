@@ -2,7 +2,7 @@ import json
 from tokenizers import Tokenizer
 import os
 tokenizer_path = "data/tokenizer.json"
-input_data_path = "data/data_com.jsonl"
+input_data_path = "data/data_clean.jsonl"
 output_data_path = "data/tokenize_data.jsonl"
 print(f"Loading tokenizer from: {tokenizer_path}")
 if not os.path.exists(tokenizer_path):

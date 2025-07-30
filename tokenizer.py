@@ -15,7 +15,7 @@ tokenizer = Tokenizer(WordPiece(unk_token="[UNK]"))
 tokenizer.normalizer = Sequence([NFD(), Lowercase()])
 tokenizer.pre_tokenizer = Whitespace()
 trainer = WordPieceTrainer(
-    vocab_size=8000,
+    vocab_size=30000,
     special_tokens=["[UNK]", "[PAD]", "[MASK]", "[BOS]", "[EOS]"]
 )
 print(f"Training the tokenizer from file: '{corpus_path}'...")

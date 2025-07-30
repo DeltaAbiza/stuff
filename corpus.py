@@ -3,7 +3,7 @@ import os
 
 # --- Configuration ---
 # The name of your input JSONL file
-input_jsonl_path = 'data/data_com.jsonl'
+input_jsonl_path = 'data/data_clean.jsonl'
 # The name of the output text file
 output_corpus_path = 'data/corpus.txt'
 # The key in the JSON object that contains the text you want to extract
